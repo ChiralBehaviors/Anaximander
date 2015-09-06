@@ -1,0 +1,27 @@
+workspace: "uri:http://ultrastructure.me/ontology/com.chiralbehaviors/demo/anaximander-workspace/v1" 
+           "Anaximander"
+           "Task Manager"
+
+imports {
+    "urn:uuid:00000000-0000-0004-0000-000000000003" as kernel
+}
+
+attributes {
+    experience = "Experience" "Experience" numeric;
+}
+
+intervals {
+    Journey = "Journey" "A journey";
+    Step = "Step" "A step";
+    
+    facets {
+        kernel::IsA.Journey  
+            constraints {
+                n kernel::HasMember: kernel::IsA.Step
+            }
+        kernel::IsA.Step  
+            constraints {
+                n kernel::MemberOf: kernel::IsA.Journey
+            }
+    }
+}

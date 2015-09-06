@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Anaximander</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.0/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.0/JSXTransformer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
+    <link href="css/anaximander.css" rel="stylesheet" />
+
+</head>
+<body>
+<div id="content">
+
+</div>
+<script type="text/jsx">
+
+
+    var Timer = React.createClass({
+        getInitialState: function () {
+            return {
+                lengthInMinutes: 0
+            };
+        },
+        tick: function () {
+            this.setState({secondsRemaining: this.state.secondsRemaining - 1});
+            this.setState({displayMinutes: Math.floor(this.state.secondsRemaining / 60)});
+            this.setState({displaySeconds: this.state.secondsRemaining % 60});
+            if (this.state.secondsRemaining <= 0) {
+                clearInterval(this.interval);
+            }
+        },
+        componentDidMount: function () {
+
+            this.setState({
+                lengthInMinutes: this.props.lengthInMinutes,
+                secondsRemaining: this.props.lengthInMinutes * 60
+            });
+        },
+        componentWillUnmount: function () {
+            clearInterval(this.interval);
+        },
+        render: function () {
+            return (
+                    <div>
+                        <div>{this.state.displayMinutes}:{this.state.displaySeconds}</div>
+                        <input type="button" name="Start" value="Start" onClick={this.start}/>
+                        <input type="button" name="Stop" value="Stop" onClick={this.stop}/>
+                        <input type="button" name="Reset" value="Reset" onClick={this.reset}/>
+                    </div>
+            );
+        },
+        start: function () {
+            this.interval = setInterval(this.tick, 1000);
+        },
+        stop: function () {
+            clearInterval(this.interval);
+        },
+        reset: function () {
+            this.setState({secondsRemaining: this.props.lengthInMinutes * 60});
+            this.setState({displayMinutes: Math.floor(this.state.secondsRemaining / 60)});
+            this.setState({displaySeconds: this.state.secondsRemaining % 60});
+        }
+    });
+
+    var Journey = React.createClass({
+        getInitialState: function() {
+            return { steps: []};
+        },
+
+        render: function () {
+            var stepNodes = this.props.steps.map(function(step) {
+                return (<tr><td>{step["@id"]}</td></tr>);
+            });
+            return (
+                    <div className="journey">
+                        <h3>{this.props.name}: {this.props.description}</h3>
+                        <table className="step.hidden">
+                        {stepNodes}
+                        </table>
+                    </div>
+            );
+        }
+    });
+
+    var journeyData = [];
+
+    var JourneyList = React.createClass({
+
+
+        render: function () {
+            if (!this.props.data) {
+                console.log('null data');
+                return null;
+            }
+
+            console.log(this.props.data);
+            var journeyNodes = this.props.data.map(function(journey) {
+                return (
+                        <Journey name={journey.name} description={journey.description} steps={journey.steps}/>
+                );
+            });
+            return (
+                    <div className="journeyList">
+                        {journeyNodes}
+                    </div>
+            )
+        }
+    });
+
+
+    var Anaximander = React.createClass({
+
+        getInitialState: function() {
+        return {data: journeyData};
+    },
+
+        getJourneys: function() {
+            $.ajax({
+                url: this.props.url,
+                dataType: 'json',
+                cache: false,
+                success: function(data) {
+                    console.log('success');
+                    console.log(data);
+                    this.setState({data: data["@graph"]});
+                }.bind(this),
+                error: function(xhr, status, err) {
+                    console.error(this.props.url, status, err.toString());
+                }.bind(this)
+            });
+        },
+
+        componentDidMount: function() {
+            this.getJourneys();
+        },
+        render: function () {
+            return (
+                    <div className="anaximander">
+                        <h1>Anaximander goes here</h1>
+                        <Timer lengthInMinutes="25"/>
+                        <JourneyList data={this.state.data}/>
+                    </div>
+            );
+        }
+    });
+
+    React.render(
+            <Anaximander url="/json-ld/facet/Interval/00000000-0000-0005-0000-000000000013/d7ecb12d-3d96-11e5-b85b-23341fff6171/instances"/>,
+            document.getElementById('content')
+    );
+</script>
+</body>
+</html>
