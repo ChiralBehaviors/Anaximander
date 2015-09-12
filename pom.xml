@@ -106,7 +106,7 @@
 			<dependency>
 				<groupId>io.dropwizard</groupId>
 				<artifactId>dropwizard-assets</artifactId>
-				<version>0.8.2</version>
+				<version>${dropwizard-version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.google.guava</groupId>

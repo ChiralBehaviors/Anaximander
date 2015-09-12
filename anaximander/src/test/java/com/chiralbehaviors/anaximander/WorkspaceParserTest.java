@@ -36,7 +36,7 @@ public class WorkspaceParserTest {
     public void testAnaximanderWorkspaceParse() throws Exception {
         WorkspaceLexer l = new WorkspaceLexer(
                                               new ANTLRInputStream(
-                                                                   getClass().getResourceAsStream("/anaximander-workspace.wsp")));
+                                                                   getClass().getResourceAsStream("/steward-workspace.wsp")));
         WorkspaceParser p = new WorkspaceParser(new CommonTokenStream(l));
         p.addErrorListener(new BaseErrorListener() {
             @Override
@@ -55,7 +55,7 @@ public class WorkspaceParserTest {
     public void testAnaximanderDemoParse() throws Exception {
         WorkspaceLexer l = new WorkspaceLexer(
                                               new ANTLRInputStream(
-                                                                   getClass().getResourceAsStream("/anaximander-scenario.wsp")));
+                                                                   getClass().getResourceAsStream("/steward-scenario.wsp")));
         WorkspaceParser p = new WorkspaceParser(new CommonTokenStream(l));
         p.addErrorListener(new BaseErrorListener() {
             @Override
