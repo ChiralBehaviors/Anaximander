@@ -1,1 +1,1 @@
-var workspaceApp=angular.module("WorkspaceApp",["Controllers"]);
+var workspaceApp=angular.module("WorkspaceApp",["jsonFormatter","restangular"]).config(function(e){e.setBaseUrl("http://localhost:8080/json-ld/")});workspaceApp.config(["$httpProvider",function(e){e.defaults.useXDomain=!0,delete e.defaults.headers.common["X-Requested-With"]}]),workspaceApp.controller("TestController",function(e,o){var n=function(){o.one("workspace").get().then(function(o){e.workspaces=o["@graph"]})};e.workspaces={workspaces:"none"},n()});
