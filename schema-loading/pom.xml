@@ -29,10 +29,11 @@
                                         <dbaUsername>${dba.db.login}</dbaUsername>
                                         <dbaPassword>${dba.db.password}</dbaPassword>
 
-                                        <coreServer>${db.server}</coreServer>
-                                        <corePort>${db.port}</corePort>
-                                        <coreUsername>${db.login}</coreUsername>
-                                        <corePassword>${db.password}</corePassword>
+                                        <coreServer>${anaximander.db.server}</coreServer>
+                                        <corePort>${anaximander.db.port}</corePort>
+                                        <coreUsername>${anaximander.db.login}</coreUsername>
+                                        <corePassword>${anaximander.db.password}</corePassword>
+                                        <coreDb>${anaximander.db.database}</coreDb>
 
                                         <dropDatabase>${drop}</dropDatabase>
                                     </loader>

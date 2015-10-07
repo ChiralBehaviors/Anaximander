@@ -1,5 +1,6 @@
-workspace: "uri:http://ultrastructure.me/ontology/com.chiralbehaviors/demo/anaximander-workspace/v1" 
-           "Anaximander"
+workspace: "uri:http://ultrastructure.me/ontology/com.chiralbehaviors/demo/steward-workspace"
+            version: 1 
+           "Steward"
            "Task Manager"
 
 imports {

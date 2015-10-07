@@ -1,9 +1,10 @@
-workspace: "uri:http://ultrastructure.me/ontology/com.chiralbehaviors/demo/anaximander/scenario/v1" 
-           "Anaximander Demo Scenario" 
-           "Demo scenario ontology for ye olde thyme Anaximander demo"
+workspace: "uri:http://ultrastructure.me/ontology/com.chiralbehaviors/demo/steward/scenario"
+            version: 1 
+           "Steward Demo Scenario" 
+           "Demo scenario ontology for ye olde thyme Steward demo"
 imports {
     "urn:uuid:00000000-0000-0004-0000-000000000003" as kernel
-    "uri:http://ultrastructure.me/ontology/com.chiralbehaviors/demo/anaximander-workspace/v1" as anaximander
+    "uri:http://ultrastructure.me/ontology/com.chiralbehaviors/demo/steward-workspace" as steward
 }
 
 intervals {
@@ -22,43 +23,43 @@ intervals {
     OperatingAgreement = "Operating Agreement" "The operating agreement step";
     JointCheckingAccount = "Joint Checking Account" "The joint checking account step";
     Ultrastructure = "Ultrastructure" "Ultrastructure";
-    Anaximander = "Anaximander" "Anaximander";
+    Steward = "Steward" "Steward";
     
     edges {  
-        Architect.kernel::IsA.anaximander::Journey
-        AStep1.kernel::IsA.anaximander::Step
+        Architect.kernel::IsA.steward::Journey
+        AStep1.kernel::IsA.steward::Step
         AStep1.kernel::MemberOf.Architect
-        AStep2.kernel::IsA.anaximander::Step
+        AStep2.kernel::IsA.steward::Step
         AStep2.kernel::MemberOf.Architect
-        AStep3.kernel::IsA.anaximander::Step
+        AStep3.kernel::IsA.steward::Step
         AStep3.kernel::MemberOf.Architect
-        AStep4.kernel::IsA.anaximander::Step
+        AStep4.kernel::IsA.steward::Step
         AStep4.kernel::MemberOf.Architect
-        AStep5.kernel::IsA.anaximander::Step
+        AStep5.kernel::IsA.steward::Step
         AStep5.kernel::MemberOf.Architect
-        AStep6.kernel::IsA.anaximander::Step
+        AStep6.kernel::IsA.steward::Step
         AStep6.kernel::MemberOf.Architect
-        AStep7.kernel::IsA.anaximander::Step
+        AStep7.kernel::IsA.steward::Step
         AStep7.kernel::MemberOf.Architect
-        AStep8.kernel::IsA.anaximander::Step
+        AStep8.kernel::IsA.steward::Step
         AStep8.kernel::MemberOf.Architect
-        AStep9.kernel::IsA.anaximander::Step
+        AStep9.kernel::IsA.steward::Step
         AStep9.kernel::MemberOf.Architect
         
-        ChiralBehaviors.kernel::IsA.anaximander::Journey
-        OperatingAgreement.kernel::IsA.anaximander::Step
+        ChiralBehaviors.kernel::IsA.steward::Journey
+        OperatingAgreement.kernel::IsA.steward::Step
         OperatingAgreement.kernel::MemberOf.ChiralBehaviors
-        JointCheckingAccount.kernel::IsA.anaximander::Step
+        JointCheckingAccount.kernel::IsA.steward::Step
         JointCheckingAccount.kernel::MemberOf.ChiralBehaviors
         
-        Ultrastructure.kernel::IsA.anaximander::Journey
-        Ultrastructure.kernel::IsA.anaximander::Step
+        Ultrastructure.kernel::IsA.steward::Journey
+        Ultrastructure.kernel::IsA.steward::Step
         Ultrastructure.kernel::MemberOf.ChiralBehaviors
         
-        Anaximander.kernel::IsA.anaximander::Journey
-        Anaximander.kernel::IsA.anaximander::Step
-        Anaximander.kernel::MemberOf.ChiralBehaviors
-        Anaximander.kernel::MemberOf.Ultrastructure
+        Steward.kernel::IsA.steward::Journey
+        Steward.kernel::IsA.steward::Step
+        Steward.kernel::MemberOf.ChiralBehaviors
+        Steward.kernel::MemberOf.Ultrastructure
     }
 } 
 

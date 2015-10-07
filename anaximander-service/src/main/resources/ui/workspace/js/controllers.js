@@ -6,7 +6,7 @@ var controllers = angular.module('Controllers', ['jsonFormatter', 'restangular']
 
 controllers.config("RestangularProvider", function (RestangularProvider) {
 
-    RestangularProvider.setBaseUrl("http://localhost:8080/json-ld/");
+    RestangularProvider.setBaseUrl("http://localhost:8080/graphql/");
 });
 
  controllers.controller("WorkspaceController", function ($scope, Restangular) {

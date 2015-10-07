@@ -3,7 +3,7 @@
  */
 
 var workspaceApp = angular.module('WorkspaceApp', ['jsonFormatter', 'restangular']).config(function (RestangularProvider) {
-    RestangularProvider.setBaseUrl("http://localhost:8080/json-ld/");
+    RestangularProvider.setBaseUrl("http://localhost:8080/graphql/");
 
 });
 
@@ -15,7 +15,7 @@ workspaceApp.config(['$httpProvider', function ($httpProvider) {
 workspaceApp.controller("TestController", function ($scope, Restangular) {
     var getWorkspaces = function () {
         Restangular.one('workspace').get().then(function (result) {
-            $scope.workspaces = result["@graph"];
+            $scope.workspaces = result.plain();
         });
     };
     $scope.workspaces = {"workspaces": "none"};
