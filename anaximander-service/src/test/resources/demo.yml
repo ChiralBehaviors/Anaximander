@@ -1,16 +1,11 @@
+auth: NULL
 jpa:
     debug: true
-    persistenceUnit: CoRE
     properties: 
         javax.persistence.jdbc.user: ${anaximander.db.login}
         javax.persistence.jdbc.password: ${anaximander.db.password}
         javax.persistence.jdbc.url: jdbc:postgresql://${anaximander.db.server}:${anaximander.db.port}/${anaximander.db.database}
         javax.persistence.jdbc.driver: org.postgresql.Driver
-        hibernate.c3p0.max_size: 20
-        hibernate.c3p0.min_size: 10
-        hibernate.c3p0.timeout: 5000
-        hibernate.c3p0.max_statements: 100
-        hibernate.c3p0.acquire_increment: 2
         
 logging:
     level: INFO

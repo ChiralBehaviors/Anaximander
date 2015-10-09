@@ -104,11 +104,6 @@
 				<version>${jackson.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>io.dropwizard</groupId>
-				<artifactId>dropwizard-assets</artifactId>
-				<version>${dropwizard.version}</version>
-			</dependency>
-			<dependency>
 				<groupId>com.google.guava</groupId>
 				<artifactId>guava</artifactId>
 				<version>18.0</version>
@@ -119,11 +114,6 @@
 				<version>0.0.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>io.dropwizard</groupId>
-				<artifactId>dropwizard-core</artifactId>
-				<version>${dropwizard.version}</version>
-			</dependency>
-			<dependency>
 				<groupId>${project.groupId}</groupId>
 				<artifactId>anaximander</artifactId>
 				<version>${project.version}</version>
@@ -132,21 +122,6 @@
 				<groupId>${project.groupId}</groupId>
 				<artifactId>anaximander-service</artifactId>
 				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>io.dropwizard</groupId>
-				<artifactId>dropwizard-auth</artifactId>
-				<version>${dropwizard.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>io.dropwizard</groupId>
-				<artifactId>dropwizard-metrics</artifactId>
-				<version>${dropwizard.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>io.dropwizard</groupId>
-				<artifactId>dropwizard-assets</artifactId>
-				<version>${dropwizard.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.postgresql</groupId>

@@ -42,7 +42,7 @@
 
 	<build>
 		<plugins>
-			<plugin>
+			<!-- <plugin>
 				<executions>
 					<execution>
 						<phase>generate-sources</phase>
@@ -62,7 +62,7 @@
 				<groupId>com.chiralbehaviors.CoRE</groupId>
 				<artifactId>phantasm-plugin</artifactId>
 				<version>${ultrastructure.version}</version>
-			</plugin>
+			</plugin> -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
