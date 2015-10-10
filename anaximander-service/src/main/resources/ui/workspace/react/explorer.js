@@ -1,97 +1,99 @@
-var workspaceJson = [{
-    "description": "The Kernel Ontology for Ultrastructure [Ain Soph Ur]",
-    "id": "00000000-0000-0004-0000-000000000003",
-    "name": "Ultrastructure Kernel Workspace"
-}, {
-    "description": "Task Manager",
-    "id": "20f06ce2-b382-5e98-ae7c-77025e39f31b",
-    "name": "Steward"
-}];
+var ruleforms = ["Product"];
+
+var productFacets =
+{
+    "@context": {"@vocab": "http://localhost:8080/json-ld/facet"},
+    "@graph": [{
+        "@id": "Product/00000000-0000-0005-0000-000000000001/00000000-0000-0004-0000-000000000001",
+        "@typeName": "(ANY):(ANY)"
+    }, {
+        "@id": "Product/00000000-0000-0005-0000-000000000013/00000000-0000-0004-0000-000000000006",
+        "@typeName": "is-a:Workspace"
+    }, {
+        "@id": "Product/00000000-0000-0005-0000-000000000013/bc8a0737-6ae7-11e5-b39a-99b88e1a491e",
+        "@typeName": "is-a:Plugin"
+    }, {
+        "@id": "Product/00000000-0000-0005-0000-000000000013/bc8a0739-6ae7-11e5-b39a-99b88e1a491e",
+        "@typeName": "is-a:Argument"
+    }, {
+        "@id": "Product/00000000-0000-0005-0000-000000000013/bc8a073b-6ae7-11e5-b39a-99b88e1a491e",
+        "@typeName": "is-a:Instance Method"
+    }, {
+        "@id": "Product/00000000-0000-0005-0000-000000000013/bc8a073d-6ae7-11e5-b39a-99b88e1a491e",
+        "@typeName": "is-a:Static method"
+    }, {
+        "@id": "Product/00000000-0000-0005-0000-000000000013/bc8a073f-6ae7-11e5-b39a-99b88e1a491e",
+        "@typeName": "is-a:Constructor"
+    }, {
+        "@id": "Product/00000000-0000-0005-0000-000000000013/bc8a2e51-6ae7-11e5-b39a-99b88e1a491e",
+        "@typeName": "is-a:Code Source"
+    }],
+    "@id": "http://localhost:8080/json-ld/facet/Product"
+};
 
 var Facet = React.createClass({
     render: function () {
         return (
             <div className="facet">
-                Facet
+                <div className="facetId">
+                    {this.props.facet["@id"]}
+                </div>
+                <div classNmae="facetName">
+                    {this.props.facet["@typeName"]}
+                </div>
             </div>
         );
     }
 });
 
-var FacetBox = React.createClass({
+var FacetList = React.createClass({
     render: function () {
-        return (
-            <div className="facetBox">
-                Facet Box
-                <Facet />
-            </div>
-        );
-    }
-});
-
-var Workspace = React.createClass({
-    render: function () {
-        return (
-            <div className="workspace">
-                Workspace
-                <FacetBox />
-            </div>
-        );
-    }
-});
-
-
-var WorkspaceBox = React.createClass({
-    render: function () {
-        return (
-            <div className="workspaceBox">
-                Workspace Box
-                <Workspace />
-            </div>
-        );
-    }
-});
-
-var WorkspaceItem = React.createClass({
-    render: function () {
-        return (
-            <div className="workspaceItem">
-                Id: {this.props.workspace.id} <br/>
-                Name: {this.props.workspace.name} <br/>
-                Desc: {this.props.workspace.description} <br/>
-            </div>
-        );
-    }
-});
-
-var workspaceListStyle = {
-    float: 'left',
-    width: '300',
-    paddingRight: '50'
-}
-var WorkspaceList = React.createClass({
-    render: function () {
-        var rows = [];
-        this.props.workspaces.forEach(function (ws) {
-            rows.push(<WorkspaceItem workspace={ws} key={ws.id}/>);
+        var facets = [];
+        productFacets["@graph"].forEach(function (facet) {
+            facets.push(<Facet facet={facet}/>);
         });
+
         return (
-            <div className="workspaceList" style={workspaceListStyle}>
-                Workspace List
-                {rows}
+            <div className="ruleformList">
+                {facets}
+            </div>
+        );
+    }
+})
+
+var Ruleform = React.createClass({
+    render: function () {
+        return (
+            <div className="ruleform">
+                {this.props.name}
+                <FacetList />
+            </div>
+        );
+
+    }
+});
+
+var RuleformList = React.createClass({
+    render: function () {
+        var rfs = [];
+        ruleforms.forEach(function (rf) {
+            rfs.push(<Ruleform name={rf}/>);
+        });
+
+        return (
+            <div className="ruleformList">
+                {rfs}
             </div>
         );
     }
 });
-
 
 var AppContainer = React.createClass({
     render: function () {
         return (
             <div className="appContainer">
-                Workspace Explorer
-                <WorkspaceList workspaces={workspaceJson}/>
-                <WorkspaceBox />
+                Facet Explorer
+                <RuleformList ruleforms={ruleforms}/>
             </div>
         );
     }
