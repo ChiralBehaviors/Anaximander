@@ -67,9 +67,33 @@ var productFacetInstances =
     "@id": "http://localhost:8080/json-ld/facet/Product/00000000-0000-0005-0000-000000000013/00000000-0000-0004-0000-000000000006/instances"
 };
 
+var CreateInstance = React.createClass({
+    handleSubmit: function(e) {
+        e.preventDefault();
+        var name = this.refs.name.value.trim();
+        if (!name) {
+            return;
+        }
+        this.props.onCreateInstance({name: name});
+        this.refs.name.value = '';
+    },
+    render: function () {
+        return (
+            <form className="createInstance" onSubmit={this.handleSubmit}>
+                <input type="text" placeholder="Ruleform name" ref="name"/>
+                <input type="submit" value="Create"/>
+            </form>
+        )
+    }
+});
+
 var FacetInstances = React.createClass({
 
-    getStyle: function() {
+    getInitialState: function() {
+        return {data: productFacetInstances["@graph"]};
+    },
+
+    getStyle: function () {
         if (this.props.display) {
             return {};
         } else {
@@ -77,16 +101,24 @@ var FacetInstances = React.createClass({
         }
     },
 
+    createInstance: function(value) {
+        var instances = this.state.data;
+        var newInstances = instances.concat(value);
+        this.setState({data: newInstances});
+        onChange();
+    },
+
     render: function () {
         var instances = [];
-        productFacetInstances["@graph"].forEach(function (instance) {
-            instances.push(<div className="facetInstance" key={instance['@id']} >
+        this.state.data.forEach(function (instance) {
+            instances.push(<div className="facetInstance" key={instance['@id']}>
                     {instance["name"]}
                 </div>
             );
         });
         return (
             <div className="facetInstances" style={this.getStyle()}>
+                <CreateInstance onCreateInstance={this.createInstance}/>
                 {instances}
             </div>
         );
@@ -97,7 +129,7 @@ var FacetInstances = React.createClass({
 var Facet = React.createClass({
 
     display: false,
-    onClick: function() {
+    onClick: function () {
         this.display = !this.display;
         onChange();
     },
@@ -105,23 +137,24 @@ var Facet = React.createClass({
     divStyle: {},
 
 
-    onMouseOver: function() {
+    onMouseOver: function () {
         this.divStyle = {
-            backgroundColor: "#90C3D4"
+            backgroundColor: "#CBECF7"
         };
         onChange();
     },
 
-    onMouseOut: function() {
+    onMouseOut: function () {
         this.divStyle = {};
         onChange();
     },
 
     render: function () {
         return (
-            <div className="facet" style={this.divStyle} onClick={this.onClick} onMouseEnter={this.onMouseOver} onMouseLeave={this.onMouseOut}>
+            <div className="facet" style={this.divStyle} onMouseEnter={this.onMouseOver}
+                 onMouseLeave={this.onMouseOut}>
                 <div className="facetName">
-                    <a href="#">{this.props.facet["@typeName"]}</a>
+                    <a href="#" onClick={this.onClick}>{this.props.facet["@typeName"]}</a>
                 </div>
                 <FacetInstances display={this.display}/>
             </div>
@@ -179,7 +212,7 @@ var AppContainer = React.createClass({
     }
 });
 
-var onChange = function() {
+var onChange = function () {
     ReactDOM.render(
         <AppContainer />,
         document.getElementById('content')
