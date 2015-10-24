@@ -71,6 +71,14 @@ var productFacetInstances = {
 var FacetInstances = React.createClass({
     displayName: 'FacetInstances',
 
+    getStyle: function getStyle() {
+        if (this.props.display) {
+            return {};
+        } else {
+            return { display: "none" };
+        }
+    },
+
     render: function render() {
         var instances = [];
         productFacetInstances["@graph"].forEach(function (instance) {
@@ -82,7 +90,7 @@ var FacetInstances = React.createClass({
         });
         return React.createElement(
             'div',
-            { className: 'facetInstances' },
+            { className: 'facetInstances', style: this.getStyle() },
             instances
         );
     }
@@ -91,8 +99,10 @@ var FacetInstances = React.createClass({
 var Facet = React.createClass({
     displayName: 'Facet',
 
+    display: false,
     onClick: function onClick() {
-        console.log("CLICK!");
+        this.display = !this.display;
+        onChange();
     },
 
     divStyle: {},
@@ -122,7 +132,7 @@ var Facet = React.createClass({
                     this.props.facet["@typeName"]
                 )
             ),
-            React.createElement(FacetInstances, null)
+            React.createElement(FacetInstances, { display: this.display })
         );
     }
 });

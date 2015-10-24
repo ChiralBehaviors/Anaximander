@@ -68,16 +68,25 @@ var productFacetInstances =
 };
 
 var FacetInstances = React.createClass({
+
+    getStyle: function() {
+        if (this.props.display) {
+            return {};
+        } else {
+            return {display: "none"};
+        }
+    },
+
     render: function () {
         var instances = [];
         productFacetInstances["@graph"].forEach(function (instance) {
-            instances.push(<div className="facetInstance" key={instance['@id']}>
+            instances.push(<div className="facetInstance" key={instance['@id']} >
                     {instance["name"]}
                 </div>
             );
         });
         return (
-            <div className="facetInstances">
+            <div className="facetInstances" style={this.getStyle()}>
                 {instances}
             </div>
         );
@@ -86,11 +95,15 @@ var FacetInstances = React.createClass({
 });
 
 var Facet = React.createClass({
+
+    display: false,
     onClick: function() {
-        console.log("CLICK!");
+        this.display = !this.display;
+        onChange();
     },
 
     divStyle: {},
+
 
     onMouseOver: function() {
         this.divStyle = {
@@ -110,7 +123,7 @@ var Facet = React.createClass({
                 <div className="facetName">
                     <a href={this.props.facet["@id"]}>{this.props.facet["@typeName"]}</a>
                 </div>
-                <FacetInstances />
+                <FacetInstances display={this.display}/>
             </div>
         );
     }
