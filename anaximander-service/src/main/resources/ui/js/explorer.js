@@ -121,7 +121,7 @@ var Facet = React.createClass({
         return (
             <div className="facet" style={this.divStyle} onClick={this.onClick} onMouseEnter={this.onMouseOver} onMouseLeave={this.onMouseOut}>
                 <div className="facetName">
-                    <a href={this.props.facet["@id"]}>{this.props.facet["@typeName"]}</a>
+                    <a href="#">{this.props.facet["@typeName"]}</a>
                 </div>
                 <FacetInstances display={this.display}/>
             </div>

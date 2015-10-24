@@ -128,7 +128,7 @@ var Facet = React.createClass({
                 { className: 'facetName' },
                 React.createElement(
                     'a',
-                    { href: this.props.facet["@id"] },
+                    { href: '#' },
                     this.props.facet["@typeName"]
                 )
             ),
